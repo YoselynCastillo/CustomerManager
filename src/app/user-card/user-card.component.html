@@ -9,15 +9,34 @@
         <a href="#" class="card-link">Another link</a>
     </div>
 </div> -->
-<div class="col mb-4">
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title text-center">Name LastName</h5>
-            <h6 class="card-subtitle mb-2 text-muted text-center">Direcction</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's
-                content.</p>
-            <a href="#" class="btn btn-dark">View Orders</a>
+
+<!-- <div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">{{name}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted text-center">{{city}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted text-center">{{street}}</h6>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+            card's
+            content.</p>
+        <a href="#" class="btn btn-dark">View Orders</a>
+    </div>
+</div> -->
+
+<div class="card">
+    <div class="row no-gutters ">
+        <div class="col-md-4 d-flex align-items-center">
+            <img src="https://image.flaticon.com/icons/png/512/44/44948.png" class="card-img my-1" alt="...">
+        </div>
+        <div class="col-md-7 text-center">
+            <div class="card-body">
+                <h5 class="card-title text-center ">{{name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{city}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{street}}</h6>
+                <a href="#" class="btn btn-dark">View Orders</a>
+            </div>
+        </div>
+        <div class="col-md-1 mt-1">
+            <i class="far fa-edit justify-content-end text-black-50"></i>
         </div>
     </div>
 </div>

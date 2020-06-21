@@ -1,9 +1,40 @@
-<div class="row row-cols-1 row-cols-md-4">
-<app-user-card></app-user-card>
-<app-user-card></app-user-card>
-<app-user-card></app-user-card>
-<app-user-card></app-user-card>
-<app-user-card></app-user-card>
-<app-user-card></app-user-card>
+<h1 class="text-center">Customers</h1>
 
+<nav class="navbar ">
+    <a class="nav-link text-dark active" href="#"><i class="fas fa-th"></i> Card View</a>
+    <a class="nav-link text-black-50" href="#"><i class="fas fa-list"></i> List View</a>
+    <a class="nav-link text-black-50" href="#"><i class="fas fa-map-marker-alt"></i> Map View</a>
+    <a class="nav-link text-black-50" href="#"><i class="fas fa-plus"></i> New Customer</a>
+    <form class="form-inline my-2">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search"  [(ngModel)]="filterCustomer" aria-label="Search" name="filterCustomer">
+        <!-- <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button> -->
+    </form>
+</nav>
+
+
+<!-- -------------CUSTOMERS------------- -->
+<div class="row row-cols-1 row-cols-md-4">
+    <!-- <div class="col mb-4" *ngFor="let user of users | filter:filterCustomer"> -->
+    <div class="col mb-4" *ngFor="let user of users | filter:filterCustomer">
+        <app-user-card [name]='user.name' [city]='user.address.city' [street]='user.address.street'></app-user-card>
+    </div>
 </div>
+<!-- -------------PAGINATION------------- -->
+<nav aria-label="...">
+    <ul class="pagination">
+        <li class="page-item disabled">
+            <span class="page-link">Previous</span>
+        </li>
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">
+                1
+                <span class="sr-only">(current)</span>
+            </span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</nav>
