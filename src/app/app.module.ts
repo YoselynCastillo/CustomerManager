@@ -5,22 +5,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
-//---------------COMPONENTES---------------//
+//---------------COMPONENTS---------------//
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { CustomersComponent } from './customers/customers.component';
 import { UserCardComponent } from './user-card/user-card.component';
-
-//---------------SERVICIOS---------------//
-import { CustomerService } from './services/customer.service';
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
 
+//---------------SERVICES---------------//
+import { CustomerService } from './services/customer.service';
+import { DataService } from './services/data.service';
+
 const routes: Routes = [
-  // { path: 'contacto', component: ContactoComponent },
-  // { path: 'equipo/:id', component: EquipoComponent },
-  { path: 'customers/info', component: CustomerInfoComponent },
+  { path: 'customers/:customerId', component: CustomerInfoComponent },
   { path: 'customers', component: CustomersComponent, pathMatch: 'full' },
-  { path: '**', redirectTo: '/customers/info', pathMatch: 'full' },
+  { path: '**', redirectTo: '/customers', pathMatch: 'full' },
 ];
 
 @NgModule({
@@ -39,7 +38,7 @@ const routes: Routes = [
     Ng2SearchPipeModule,
   ],
   exports: [RouterModule],
-  providers: [CustomerService],
+  providers: [CustomerService, DataService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
