@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../services/data.service';
 import { Subscription } from 'rxjs';
+// ---------------MODELS--------------- //
 import { Customer } from '../customer.model';
+// ---------------SERVICES--------------- //
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-customer-info',
@@ -10,35 +12,39 @@ import { Customer } from '../customer.model';
   styleUrls: ['./customer-info.component.css'],
 })
 export class CustomerInfoComponent implements OnInit, OnDestroy {
-
+  // ---------------CONSTRUCTOR--------------- //
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService
   ) {}
+  // ---------------VARIABLES--------------- //
 
-  arrayCustomer: Customer[];
+  customers: Customer[];
   cust: Customer;
-  private escuchaMensajes(): void {
-    this.suscripcionMensajes = this.dataService.escucha().subscribe((msj) => {
-      console.log('Se ha recibido el array de customers');
-      console.log(msj);
-      this.arrayCustomer = msj;
-    });
-  }
-  private suscripcionMensajes: Subscription; // Aquí almacenaremos la suscripción
+  private subscription: Subscription;
 
+  // ---------------FUNCTIONS--------------- //
   ngOnInit(): void {
-    this.escuchaMensajes();
+    this.getMessages();
     this.route.paramMap.subscribe((params) => {
-      this.cust = this.arrayCustomer[+params.get('customerId') - 1];
+      this.cust = this.customers[+params.get('customerId') - 1];
       console.log(this.cust);
     });
   }
-  ngOnDestroy(): void {
-    this.suscripcionMensajes.unsubscribe(); // Cancelamos la suscripción cuando se destruya el componente
+  private getMessages(): void {
+    this.subscription = this.dataService.get().subscribe((msj) => {
+      console.log(
+        'The array of customers has been received in customers-info.component'
+      );
+      console.log(msj);
+      this.customers = msj;
+    });
   }
   modificar() {
     console.log(this.cust);
-    console.log(this.arrayCustomer);
+    console.log(this.customers);
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe(); // Cancelamos la suscripción cuando se destruya el componente
   }
 }

@@ -15,6 +15,8 @@ import { CustomerInfoComponent } from './customer-info/customer-info.component';
 //---------------SERVICES---------------//
 import { CustomerService } from './services/customer.service';
 import { DataService } from './services/data.service';
+import { ListViewComponent } from './list-view/list-view.component';
+import { CardViewComponent } from './card-view/card-view.component';
 
 const routes: Routes = [
   { path: 'customers/:customerId', component: CustomerInfoComponent },
@@ -29,6 +31,8 @@ const routes: Routes = [
     CustomersComponent,
     UserCardComponent,
     CustomerInfoComponent,
+    ListViewComponent,
+    CardViewComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs'; // Tenemos que importar los observables de la librería RxJS
+import { Observable, BehaviorSubject } from 'rxjs'; // We have to import the observables from the RxJS library
+// ---------------MODELS--------------- //
 import { Customer } from '../customer.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
+  // ---------------CONSTRUCTOR--------------- //
   constructor() {}
-  private mensajero = new BehaviorSubject<any>('');
 
-  public escucha(): Observable<Customer[]> {
-    return this.mensajero.asObservable();
+  // ---------------VARIABLES--------------- //
+  private messenger = new BehaviorSubject<any>('');
+
+  // ---------------FUNCTIONS--------------- //
+  public get(): Observable<Customer[]> {
+    return this.messenger.asObservable();
   }
-  public emite(msj: any): void {
-    this.mensajero.next(msj);
+  public post(msj: any): void {
+    this.messenger.next(msj);
   }
 }
