@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 // ---------------MODELS--------------- //
 import { Customer } from '../customer.model';
@@ -12,14 +13,34 @@ import { DataService } from '../services/data.service';
 })
 export class CustomersComponent implements OnInit, OnDestroy {
   // ---------------CONSTRUCTOR--------------- //
-  constructor(
-    private dataService: DataService
-  ) {}
+  constructor(private dataService: DataService) {}
   // ---------------VARIABLES--------------- //
   customers: Customer[];
-  filterCustomer: string;
-  cust: Customer;
+  cust: Customer = {
+    id: 0,
+    name: '',
+    username: '',
+    email: '',
+    address: {
+      street: '',
+      suite: '',
+      city: '',
+      zipcode: '',
+      geo: {
+        lat: 0,
+        lng: 0,
+      },
+    },
+    phone: '',
+    website: '',
+    company: {
+      name: '',
+      catchPhrase: '',
+      bs: '',
+    },
+  };
   private subscription: Subscription;
+  filterCustomer: string;
 
   // ---------------FUNCTIONS--------------- //
 
@@ -38,8 +59,9 @@ export class CustomersComponent implements OnInit, OnDestroy {
   }
 
   addCustomer() {
-    console.log('Click addCustomer');
-    // this.customers.push(this.cust);
+    this.cust.id = this.customers.length + 1;
+    console.log(this.cust);
+    this.customers.push(this.cust);
   }
 
   // Cancelamos la suscripción cuando se destruya el componente

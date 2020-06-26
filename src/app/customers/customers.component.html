@@ -1,9 +1,9 @@
 <h1 class="text-center">Customers</h1>
 
 <nav class="navbar ">
-    <a class="nav-link text-dark active" href="#"><i class="fas fa-th"></i> Card View</a>
-    <a class="nav-link text-black-50" href="#"><i class="fas fa-list"></i> List View</a>
-    <a class="nav-link text-black-50" href="#"><i class="fas fa-map-marker-alt"></i> Map View</a>
+    <a class="nav-link text-black-50" routerLinkActive="active" [routerLink]="['cardview']"><i class="fas fa-th"></i> Card View</a>
+    <a class="nav-link text-black-50" routerLinkActive="active" [routerLink]="['listview']"><i class="fas fa-list"></i> List View</a>
+    <a class="nav-link text-black-50" routerLinkActive="active" href="#"><i class="fas fa-map-marker-alt"></i> Map View</a>
     <a class="nav-link text-black-50" href="#" data-toggle="modal" data-target="#exampleModal"><i
             class="fas fa-plus"></i> New Customer</a>
     <form class="form-inline my-2">
@@ -15,12 +15,15 @@
 
 
 <!-- -------------CUSTOMERS------------- -->
-<div class="row row-cols-1 row-cols-md-4">
-    <!-- <div class="col mb-4" *ngFor="let customer of customers | filter:filterCustomer"> -->
-    <div class="col mb-4" *ngFor="let customer of customers | filter:filterCustomer">
-        <app-user-card [name]='customer.name' [city]='customer.address.city' [street]='customer.address.street' [i]='customer.id'></app-user-card>
-    </div>
+<div>
+    <!-- <app-card-view></app-card-view> -->
+    <router-outlet></router-outlet>
 </div>
+
+
+<!-- <app-card-view [customers]='customers'  ></app-card-view> -->
+<!-- <app-card-view></app-card-view> -->
+
 <!-- -------------PAGINATION------------- -->
 <nav aria-label="...">
     <ul class="pagination">
@@ -44,30 +47,33 @@
 
 
 <!-- -------------MODAL------------- -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create Customer</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form (ngSubmit)="addCustomer()">
-                    <!-- <input type="text" placeholder="Name" name="name" class="form-control mb-2"
-                        [(ngModel)]="cust.name">
-                    <input type="text" placeholder="City" name="address.city" class="form-control mb-2"
-                        [(ngModel)]="cust.address.city">
-                    <input type="text" placeholder="Street" name="address.street" class="form-control"
-                        [(ngModel)]="cust.address.street"> -->
-                    <button class="btn btn-info" type="submit" >Create</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary">Close</button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Customer nro: {{customers.length+1}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input type="text" placeholder='Name' name="name" class="form-control mb-2"
+                            [(ngModel)]="cust.name">
+                        <input type="text" placeholder='City' name="address.city"
+                            [(ngModel)]="cust.address.city" class="form-control mb-2">
+                        <input type="text" placeholder='Street' name="address.street"
+                            [(ngModel)]="cust.address.street" class="form-control">
+                        <!-- <button class="btn btn-info" type="submit">Edit</button> -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+                    <button (click)='addCustomer()'type="submit" class="btn btn-outline-dark" data-dismiss="modal" aria-label="Close">
+                        Create
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>

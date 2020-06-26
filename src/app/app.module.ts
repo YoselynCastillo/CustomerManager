@@ -19,9 +19,22 @@ import { ListViewComponent } from './list-view/list-view.component';
 import { CardViewComponent } from './card-view/card-view.component';
 
 const routes: Routes = [
+  {
+    path: 'customers',
+    component: CustomersComponent,
+    children: [
+      {
+        path: 'cardview',
+        component: CardViewComponent,
+      },
+      {
+        path: 'listview',
+        component: ListViewComponent,
+      },
+    ],
+  },
   { path: 'customers/:customerId', component: CustomerInfoComponent },
-  { path: 'customers', component: CustomersComponent, pathMatch: 'full' },
-  { path: '**', redirectTo: '/customers', pathMatch: 'full' },
+  // { path: '**', redirectTo: '/customers/cardview', pathMatch: 'full' },
 ];
 
 @NgModule({
