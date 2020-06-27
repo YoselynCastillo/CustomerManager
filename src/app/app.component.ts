@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   // ---------------VARIABLES--------------- //
   title = 'Customer Manager ';
   customers: Customer[];
+  filterCustomer: string;
 
   // ---------------FUNCTIONS--------------- //
 

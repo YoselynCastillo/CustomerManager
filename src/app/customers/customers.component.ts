@@ -19,26 +19,12 @@ export class CustomersComponent implements OnInit, OnDestroy {
   cust: Customer = {
     id: 0,
     name: '',
-    username: '',
-    email: '',
     address: {
       street: '',
-      suite: '',
       city: '',
-      zipcode: '',
-      geo: {
-        lat: 0,
-        lng: 0,
-      },
-    },
-    phone: '',
-    website: '',
-    company: {
-      name: '',
-      catchPhrase: '',
-      bs: '',
     },
   };
+  customer: Customer;
   private subscription: Subscription;
   filterCustomer: string;
 
@@ -50,22 +36,28 @@ export class CustomersComponent implements OnInit, OnDestroy {
 
   private getMessages(): void {
     this.subscription = this.dataService.get().subscribe((msj) => {
-      console.log(
-        'The array of customers has been received in customers.component'
-      );
       this.customers = msj;
-      console.log(this.customers);
     });
   }
 
   addCustomer() {
     this.cust.id = this.customers.length + 1;
     console.log(this.cust);
-    this.customers.push(this.cust);
+    this.customers.push({
+      name: this.cust.name,
+      id: this.cust.id,
+      address: {
+        city: this.cust.address.city,
+        street: this.cust.address.street,
+      },
+    });
+    this.cust.name = '';
+    this.cust.address.city = '';
+    this.cust.address.street = '';
   }
 
-  // Cancelamos la suscripción cuando se destruya el componente
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+  
 }

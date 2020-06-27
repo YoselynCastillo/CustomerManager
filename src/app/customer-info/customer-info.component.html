@@ -4,7 +4,8 @@
     <nav class="navbar justify-content-start">
         <a class="nav-link text-dark active" href="#"><i class="fas fa-list"></i> Customer Details</a>
         <a class="nav-link text-black-50" href="#"><i class="fas fa-tags"></i> Customer Orders</a>
-        <a class="nav-link text-black-50" href="#" data-toggle="modal" data-target="#exampleModal"><i class="far fa-edit"></i>
+        <a class="nav-link text-black-50" href="#" data-toggle="modal" data-target="#exampleModal"><i
+                class="far fa-edit"></i>
             Edit Customer</a>
     </nav>
     <div class="card">
@@ -23,37 +24,34 @@
 
         </div>
     </div>
+ <!-- ---------------MODAL---------------  -->
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLabel">Editar: {{editarItem.name}}</h5> -->
                     <h5 class="modal-title" id="exampleModalLabel">Edit Customer</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form (ngSubmit)='modificar()'>
-                        <input type="text" placeholder={{cust.name}} name="name" class="form-control mb-2" [(ngModel)]="cust.name">
+                    <form>
+                        <input type="text" placeholder={{cust.name}} name="name" class="form-control mb-2"
+                            [(ngModel)]="cust.name">
                         <input type="text" placeholder={{cust.address.city}} name="address.city"
                             [(ngModel)]="cust.address.city" class="form-control mb-2">
                         <input type="text" placeholder={{cust.address.street}} name="address.street"
                             [(ngModel)]="cust.address.street" class="form-control">
-                        <button class="btn btn-info" type="submit">Edit</button>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary">Close</button>
-                </div>
+                    <button (click)='modificar()' type="submit" class="btn btn-outline-dark" data-dismiss="modal"
+                        aria-label="Close">
+                        Edit
+                    </button> </div>
             </div>
         </div>
     </div>
-
-
-
-    <!-- <app-user-card [name]='user.name' [city]='user.address.city' [street]='user.address.street' [i]='user.id'>
-    </app-user-card> -->
 </div>

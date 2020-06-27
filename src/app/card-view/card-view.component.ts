@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 // ---------------MODELS--------------- //
 import { Customer } from '../customer.model';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 // ---------------SERVICES--------------- //
 import { DataService } from '../services/data.service';
 
@@ -15,7 +17,7 @@ export class CardViewComponent implements OnInit {
   constructor(private dataService: DataService) {}
   // ---------------VARIABLES--------------- //
   customers: Customer[];
-  filterCustomer: string;
+  filterCustomer: string='';
   cust: Customer;
   private subscription: Subscription;
 
@@ -34,10 +36,12 @@ export class CardViewComponent implements OnInit {
       this.customers = msj;
       console.log(this.customers);
     });
+
   }
 
   // Cancelamos la suscripción cuando se destruya el componente
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+  search(){}
 }

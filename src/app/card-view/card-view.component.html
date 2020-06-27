@@ -1,6 +1,6 @@
 <div class="row row-cols-1 row-cols-md-4">
     <!-- <div class="col mb-4" *ngFor="let customer of customers | filter:filterCustomer"> -->
-    <div class="col mb-4" *ngFor="let customer of customers | filter:filterCustomer">
+    <div class="col mb-4" *ngFor="let customer of customers">
         <app-user-card [name]='customer.name' [city]='customer.address.city' [street]='customer.address.street'
             [i]='customer.id'></app-user-card>
     </div>

@@ -34,7 +34,7 @@ const routes: Routes = [
     ],
   },
   { path: 'customers/:customerId', component: CustomerInfoComponent },
-  // { path: '**', redirectTo: '/customers/cardview', pathMatch: 'full' },
+  { path: '**', redirectTo: '/customers/cardview'},
 ];
 
 @NgModule({

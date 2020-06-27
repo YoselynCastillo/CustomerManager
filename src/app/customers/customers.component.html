@@ -1,28 +1,56 @@
 <h1 class="text-center">Customers</h1>
 
 <nav class="navbar ">
-    <a class="nav-link text-black-50" routerLinkActive="active" [routerLink]="['cardview']"><i class="fas fa-th"></i> Card View</a>
-    <a class="nav-link text-black-50" routerLinkActive="active" [routerLink]="['listview']"><i class="fas fa-list"></i> List View</a>
-    <a class="nav-link text-black-50" routerLinkActive="active" href="#"><i class="fas fa-map-marker-alt"></i> Map View</a>
-    <a class="nav-link text-black-50" href="#" data-toggle="modal" data-target="#exampleModal"><i
+    <a class="nav-link text-dark" routerLinkActive="active" [routerLink]="['cardview']"><i class="fas fa-th"></i> Card View</a>
+    <a class="nav-link text-dark" routerLinkActive="active" [routerLink]="['listview']"><i class="fas fa-list"></i> List View</a>
+    <a class="nav-link text-dark" routerLinkActive="active" href="#"><i class="fas fa-map-marker-alt"></i> Map View</a>
+    <a class="nav-link text-dark" href="#" data-toggle="modal" data-target="#exampleModal"><i
             class="fas fa-plus"></i> New Customer</a>
     <form class="form-inline my-2">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" [(ngModel)]="filterCustomer"
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" 
             aria-label="Search" name="filterCustomer">
-        <!-- <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button> -->
+        <!-- <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" (click)='search()'>Search</button> -->
     </form>
 </nav>
+<!-- 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2"
+        aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                </a>
+                
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav> -->
 
 
 <!-- -------------CUSTOMERS------------- -->
 <div>
-    <!-- <app-card-view></app-card-view> -->
     <router-outlet></router-outlet>
 </div>
-
-
-<!-- <app-card-view [customers]='customers'  ></app-card-view> -->
-<!-- <app-card-view></app-card-view> -->
 
 <!-- -------------PAGINATION------------- -->
 <nav aria-label="...">
@@ -65,11 +93,9 @@
                             [(ngModel)]="cust.address.city" class="form-control mb-2">
                         <input type="text" placeholder='Street' name="address.street"
                             [(ngModel)]="cust.address.street" class="form-control">
-                        <!-- <button class="btn btn-info" type="submit">Edit</button> -->
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
                     <button (click)='addCustomer()'type="submit" class="btn btn-outline-dark" data-dismiss="modal" aria-label="Close">
                         Create
                     </button>

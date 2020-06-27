@@ -1,21 +1,21 @@
 export class Customer {
   id: number;
   name: string;
-  username: string;
-  email: string;
+  username?: string;
+  email?: string;
   address: {
     street: string;
-    suite: string;
+    suite?: string;
     city: string;
-    zipcode: string;
-    geo: {
+    zipcode?: string;
+    geo?: {
       lat: number;
       lng: number;
     };
   };
-  phone: string;
-  website: string;
-  company: {
+  phone?: string;
+  website?: string;
+  company?: {
     name: string;
     catchPhrase: string;
     bs: string;

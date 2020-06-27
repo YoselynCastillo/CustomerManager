@@ -28,15 +28,10 @@ export class CustomerInfoComponent implements OnInit, OnDestroy {
     this.getMessages();
     this.route.paramMap.subscribe((params) => {
       this.cust = this.customers[+params.get('customerId') - 1];
-      console.log(this.cust);
     });
   }
   private getMessages(): void {
     this.subscription = this.dataService.get().subscribe((msj) => {
-      console.log(
-        'The array of customers has been received in customers-info.component'
-      );
-      console.log(msj);
       this.customers = msj;
     });
   }
@@ -45,6 +40,6 @@ export class CustomerInfoComponent implements OnInit, OnDestroy {
     console.log(this.customers);
   }
   ngOnDestroy(): void {
-    this.subscription.unsubscribe(); // Cancelamos la suscripción cuando se destruya el componente
+    this.subscription.unsubscribe();
   }
 }
