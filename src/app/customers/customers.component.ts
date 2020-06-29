@@ -1,10 +1,23 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnInit,
+  OnDestroy,
+  SimpleChanges,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 // ---------------MODELS--------------- //
 import { Customer } from '../customer.model';
 // ---------------SERVICES--------------- //
 import { DataService } from '../services/data.service';
+import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-customers',
@@ -13,7 +26,11 @@ import { DataService } from '../services/data.service';
 })
 export class CustomersComponent implements OnInit, OnDestroy {
   // ---------------CONSTRUCTOR--------------- //
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private searchService: SearchService,
+    private fb: FormBuilder
+  ) {}
   // ---------------VARIABLES--------------- //
   customers: Customer[];
   cust: Customer = {
@@ -26,18 +43,36 @@ export class CustomersComponent implements OnInit, OnDestroy {
   };
   customer: Customer;
   private subscription: Subscription;
-  filterCustomer: string;
-
+  private subscriptionSearch: Subscription;
+  OnChange: any;
+  formGroup: FormGroup;
   // ---------------FUNCTIONS--------------- //
 
   ngOnInit(): void {
     this.getMessages();
+
+    this.formGroup = this.fb.group({
+      Search: [''],
+    });
+    // Subscribe to valueChanges observable
+    this.formGroup.get('Search').valueChanges.subscribe((value) => {
+      console.log(value);
+      console.log('customers dentros de cardview: ', this.customers);
+      this.OnChange(value);
+    });
   }
 
   private getMessages(): void {
     this.subscription = this.dataService.get().subscribe((msj) => {
       this.customers = msj;
+      console.log('dentro de getMess: ', this.customers);
     });
+    this.subscriptionSearch = this.searchService
+      .getFunction()
+      .subscribe((msj) => {
+        this.OnChange = msj;
+        console.log('funcion que llega: ',this.OnChange);
+      });
   }
 
   addCustomer() {
@@ -58,6 +93,6 @@ export class CustomersComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.subscriptionSearch.unsubscribe();
   }
-  
 }

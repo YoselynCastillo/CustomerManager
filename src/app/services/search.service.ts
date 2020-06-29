@@ -5,7 +5,7 @@ import { Customer } from '../customer.model';
 @Injectable({
   providedIn: 'root',
 })
-export class DataService {
+export class SearchService {
   // ---------------CONSTRUCTOR--------------- //
   constructor() {}
 
@@ -13,11 +13,13 @@ export class DataService {
   private messenger = new BehaviorSubject<any>('');
 
   // ---------------FUNCTIONS--------------- //
-  public get(): Observable<Customer[]> {
+  public getFunction(): Observable<Function> {
     return this.messenger.asObservable();
   }
 
-  public post(msj: Customer[]): void {
+  public postFunction(msj: any): void {
     this.messenger.next(msj);
+    console.log('se envio funcion');
+    // console.log(msj);
   }
 }

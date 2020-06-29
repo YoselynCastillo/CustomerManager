@@ -25,16 +25,12 @@ export class CardViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMessages();
-    console.log('entre a cardviewcomponent');
   }
 
   private getMessages(): void {
     this.subscription = this.dataService.get().subscribe((msj) => {
-      console.log(
-        'The array of customers has been received in customers.component'
-      );
       this.customers = msj;
-      console.log(this.customers);
+      console.log(this.customers);    
     });
 
   }
