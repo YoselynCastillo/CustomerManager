@@ -1,23 +1,18 @@
 import {
   Component,
-  OnChanges,
   OnInit,
   OnDestroy,
-  SimpleChanges,
 } from '@angular/core';
 import {
-  FormControl,
   FormGroup,
   FormBuilder,
-  Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 // ---------------MODELS--------------- //
 import { Customer } from '../customer.model';
 // ---------------SERVICES--------------- //
 import { DataService } from '../services/data.service';
-import { SearchService } from '../services/search.service';
+import { CustomerService } from '../services/customer.service';
 
 @Component({
   selector: 'app-customers',
@@ -28,7 +23,7 @@ export class CustomersComponent implements OnInit, OnDestroy {
   // ---------------CONSTRUCTOR--------------- //
   constructor(
     private dataService: DataService,
-    private searchService: SearchService,
+    private customerService: CustomerService,
     private fb: FormBuilder
   ) {}
   // ---------------VARIABLES--------------- //
@@ -43,36 +38,23 @@ export class CustomersComponent implements OnInit, OnDestroy {
   };
   customer: Customer;
   private subscription: Subscription;
-  private subscriptionSearch: Subscription;
   OnChange: any;
   formGroup: FormGroup;
+  customersfilter;
   // ---------------FUNCTIONS--------------- //
 
   ngOnInit(): void {
-    this.getMessages();
-
     this.formGroup = this.fb.group({
       Search: [''],
     });
-    // Subscribe to valueChanges observable
+    this.customerService.getApi().subscribe((res) => {
+      this.customers = res;
+      this.dataService.post(this.customers);
+    });
     this.formGroup.get('Search').valueChanges.subscribe((value) => {
-      console.log(value);
-      console.log('customers dentros de cardview: ', this.customers);
-      this.OnChange(value);
+      // console.log(value);
+      this.OnChanges(value);
     });
-  }
-
-  private getMessages(): void {
-    this.subscription = this.dataService.get().subscribe((msj) => {
-      this.customers = msj;
-      console.log('dentro de getMess: ', this.customers);
-    });
-    this.subscriptionSearch = this.searchService
-      .getFunction()
-      .subscribe((msj) => {
-        this.OnChange = msj;
-        console.log('funcion que llega: ',this.OnChange);
-      });
   }
 
   addCustomer() {
@@ -90,9 +72,17 @@ export class CustomersComponent implements OnInit, OnDestroy {
     this.cust.address.city = '';
     this.cust.address.street = '';
   }
+  OnChanges(search: string) {
+    // console.log('Valor de Busqueda: ', search);
+    this.customersfilter = this.customers.filter((customer) => {
+      return customer.name.toLowerCase().includes(search);
+    });
+    // console.log('Customers TOTAL :', this.customers);
+    // console.log('Customers Filter :', this.customersfilter);
+    this.dataService.post(this.customersfilter);
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-    this.subscriptionSearch.unsubscribe();
   }
 }

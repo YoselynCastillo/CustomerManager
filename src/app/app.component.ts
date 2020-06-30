@@ -23,28 +23,27 @@ export class AppComponent implements OnInit {
 
   // ---------------VARIABLES--------------- //
   title = 'Customer Manager ';
-  customers: Customer[];
-  filterCustomer: string;
-  customersfilter;
+  // customers: Customer[];
+  // filterCustomer: string;
+  // customersfilter;
   // ---------------FUNCTIONS--------------- //
 
   ngOnInit() {
-    this.customerService.getApi().subscribe((res) => {
-      console.log('Ejecutando ngOnInit');
-      this.customers = res;
-      this.dataService.post(this.customers);
-      this.searchService.postFunction(this.OnChanges);
-    });
+    // this.customerService.getApi().subscribe((res) => {
+    //   console.log('Ejecutando ngOnInit');
+    //   this.customers = res;
+    //   this.dataService.post(this.customers);
+    //   this.searchService.postFunction(this.OnChanges);
+    // });
   }
 
-  OnChanges(search: string) {
-    console.log('Valor de Busqueda: ', search);
-    
-    this.customersfilter = this.customers.filter((customer) => {
-      return customer.name.toLowerCase().includes(search);
-    });
-    console.log('APP TOTAL :', this.customers);
-    console.log('APP Filter :', this.customersfilter);
-    // this.dataService.post(this.customersfilter);
-  }
+  // OnChanges(search: string) {
+  //   console.log('Valor de Busqueda: ', search);
+  //   this.customersfilter = this.customers.filter((customer) => {
+  //     return customer.name.toLowerCase().includes(search);
+  //   });
+  //   console.log('APP TOTAL :', this.customers);
+  //   console.log('APP Filter :', this.customersfilter);
+  //   this.dataService.post(this.customersfilter);
+  // }
 }

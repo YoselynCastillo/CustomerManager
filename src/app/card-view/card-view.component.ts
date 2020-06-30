@@ -30,7 +30,7 @@ export class CardViewComponent implements OnInit {
   private getMessages(): void {
     this.subscription = this.dataService.get().subscribe((msj) => {
       this.customers = msj;
-      console.log(this.customers);    
+      // console.log(this.customers);    
     });
 
   }

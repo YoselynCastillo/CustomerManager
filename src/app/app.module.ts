@@ -13,7 +13,6 @@ import { UserCardComponent } from './user-card/user-card.component';
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
 import { ListViewComponent } from './list-view/list-view.component';
 import { CardViewComponent } from './card-view/card-view.component';
-import { TestComponent } from './test/test.component';
 //---------------SERVICES---------------//
 import { CustomerService } from './services/customer.service';
 import { DataService } from './services/data.service';
@@ -35,8 +34,7 @@ const routes: Routes = [
       },
     ],
   },
-  { path: 'orders', component: TestComponent },
-  { path: 'customers/:customerId', component: CustomerInfoComponent },
+   { path: 'customers/:customerId', component: CustomerInfoComponent },
   // { path: '**', redirectTo: '/customers/cardview'},
   { path: '**', redirectTo: '/orders'},
 ];
@@ -50,7 +48,6 @@ const routes: Routes = [
     CustomerInfoComponent,
     ListViewComponent,
     CardViewComponent,
-    TestComponent,
   ],
   imports: [
     BrowserModule,
